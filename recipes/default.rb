@@ -15,7 +15,7 @@ end
 
 node['source_install']['install'].each do |_item|
 
-  File.umask(node['source_install'][_item]['umask'] || '022')
+  File.umask(node['source_install'][_item]['umask'] || 0o022)
 
   node['source_install'][_item]['directories'].each do |_dir|
     directory _dir do
