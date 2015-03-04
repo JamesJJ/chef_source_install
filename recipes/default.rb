@@ -35,7 +35,7 @@ node['source_install']['install'].each do |_item|
   execute "extract #{_file}" do
     environment "PATH" => "/bin:/usr/bin:/usr/sbin:/sbin"
     command node['source_install'][_item]['extract_command']
-    cwd node['source_install'][_item]['working_dir']
+    cwd node['source_install'][_item]['download_dir']
   end
 
   execute "configure" do
