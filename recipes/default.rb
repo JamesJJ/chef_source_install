@@ -15,14 +15,14 @@ end
 
 node['source_install']['install'].each do |_item|
 
-  File.umask(node['source_install'][_item]['umask'] rescue '0722')
+  File.umask(node['source_install'][_item]['umask'] || '022')
 
   node['source_install'][_item]['directories'].each do |_dir|
     directory _dir do
       action :create
       recursive true
-      owner node['source_install'][_item]['owner'] rescue 'root'
-      group node['source_install'][_item]['group'] rescue 'root'
+      owner node['source_install'][_item]['owner'] || 'root'
+      group node['source_install'][_item]['group'] || 'root'
     end
   end
 
