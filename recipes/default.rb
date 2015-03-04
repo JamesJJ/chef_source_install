@@ -6,3 +6,58 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+
+node['source_install']['packages'].each do |_p|
+  package _p
+end
+
+
+node['source_install']['install'].each do |_item|
+
+  File.umask(node['source_install'][_item]['umask'] rescue '0722')
+
+  node['source_install'][_item]['directories'].each do |_dir|
+    directory _dir do
+      action :create
+      recursive true
+      owner node['source_install'][_item]['owner'] rescue 'root'
+      group node['source_install'][_item]['group'] rescue 'root'
+    end
+  end
+
+  _file = File.basename(node['source_install'][_item]['remote_file'])
+
+  remote_file File.join(node['source_install'][_item]['working_dir'], _file) do
+    source node['source_install'][_item]['remote_file']
+  end
+
+  execute "extract #{_file}" do
+    environment "PATH" => "/bin:/usr/bin:/usr/sbin:/sbin"
+    command node['source_install'][_item]['extract_command']
+    cwd node['source_install'][_item]['working_dir']
+  end
+
+  execute "configure" do
+    environment "PATH" => "/bin:/usr/bin:/usr/sbin:/sbin"
+    command node['source_install'][_item]['configure_command']
+    cwd node['source_install'][_item]['working_dir']
+  end
+
+  execute "make" do
+    environment "PATH" => "/bin:/usr/bin:/usr/sbin:/sbin"
+    command node['source_install'][_item]['make_command']
+    cwd node['source_install'][_item]['working_dir']
+  end
+
+  execute "make install" do
+    environment "PATH" => "/bin:/usr/bin:/usr/sbin:/sbin"
+    command node['source_install'][_item]['install_command']
+    cwd node['source_install'][_item]['working_dir']
+  end
+
+end
+
+
+
+
