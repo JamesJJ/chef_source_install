@@ -9,6 +9,6 @@ default['source_install']['nettle']['remote_file'] = "http://ftp.gnu.org/gnu/net
 default['source_install']['nettle']['download_dir'] = "/opt/nettle/src/"
 default['source_install']['nettle']['extract_command'] = "rm -Rf /opt/nettle/src/nettle-2.7.1; tar -xz -C /opt/nettle/src -f /opt/nettle/src/nettle-2.7.1.tar.gz"
 default['source_install']['nettle']['working_dir'] = "/opt/nettle/src/nettle-2.7.1"
-default['source_install']['nettle']['configure_cmd'] = "bash -c './configure --prefix=/opt/nettle --exec-prefix=/opt/nettle'"
+default['source_install']['nettle']['configure_command'] = "bash -c 'pwd ; ./configure --prefix=/opt/nettle --exec-prefix=/opt/nettle'"
 default['source_install']['nettle']['make_cmd'] = "make"
 default['source_install']['nettle']['install_cmd'] = "make install"
