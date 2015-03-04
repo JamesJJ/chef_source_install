@@ -1,5 +1,6 @@
 default['source_install']['packages'] = [ "tar", "curl" ]
-default['source_install']['install'] = [ "nettle" ]
+
+default['source_install']['install'] = [  ]
 
 default['source_install']['nettle']['directories'] = [ '/opt/nettle','/opt/nettle/src' ]
 default['source_install']['nettle']['owner'] = 'root'
