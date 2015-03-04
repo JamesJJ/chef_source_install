@@ -28,7 +28,7 @@ node['source_install']['install'].each do |_item|
 
   _file = File.basename(node['source_install'][_item]['remote_file'])
 
-  remote_file File.join(node['source_install'][_item]['working_dir'], _file) do
+  remote_file File.join(node['source_install'][_item]['download_dir'], _file) do
     source node['source_install'][_item]['remote_file']
   end
 
